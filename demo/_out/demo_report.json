@@ -1,0 +1,601 @@
+{
+  "run_at": "2026-11-20 17:40:14",
+  "steps": {
+    "seed": {
+      "cases": [
+        {
+          "symptom": "本体结构严重异常（振动烈度超标），变化趋势明显异常（劣化速率过快），工艺成因明显异常（润滑压差偏离）",
+          "immediate_cause": "轴承磨损",
+          "root_cause": "润滑失效",
+          "fix_action": "加注/更换润滑脂并按周期复查油路；磨损超标则更换轴承",
+          "trits": [
+            -1,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0
+          ],
+          "device_type": "旋转机械"
+        },
+        {
+          "symptom": "本体结构明显异常（振动烈度超标），位置布局严重异常（对中偏差超差）",
+          "immediate_cause": "联轴器对中超差",
+          "root_cause": "安装对中偏差",
+          "fix_action": "重新对中并复测联轴器径向/端面偏差",
+          "trits": [
+            -1,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "device_type": "旋转机械"
+        },
+        {
+          "symptom": "本体结构明显异常（振动烈度超标），功能性能严重异常（输出流量不足）",
+          "immediate_cause": "叶轮结垢",
+          "root_cause": "介质结垢导致叶轮不平衡",
+          "fix_action": "停机清垢并做动平衡校验",
+          "trits": [
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "device_type": "旋转机械"
+        }
+      ],
+      "stats": {
+        "chains": 3,
+        "immunity_patterns": 3,
+        "verified_patterns": 3
+      }
+    },
+    "normal": {
+      "trits": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "result": {
+        "device": {
+          "device_id": "PUMP-001"
+        },
+        "symptom": "设备运行正常",
+        "hexagram": {
+          "index": 16405,
+          "trits": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "name": "体和 用阳 变和 时和 空和 势和 因和 果和 缘阳",
+          "readable": "偏强：功能性能、外部关联",
+          "prob": 0.7703
+        },
+        "field": {
+          "entropy": 1.3638,
+          "dispersion": 0.2297,
+          "stationary_ratio": 0.8862,
+          "lam": 1.3484
+        },
+        "top_candidates": [
+          {
+            "index": 16405,
+            "trits": [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "name": "体和 用阳 变和 时和 空和 势和 因和 果和 缘阳",
+            "prob": 0.7703
+          },
+          {
+            "index": 16396,
+            "trits": [
+              0,
+              1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "name": "体和 用阳 变阴 时和 空和 势和 因和 果和 缘阳",
+            "prob": 0.0139
+          },
+          {
+            "index": 14218,
+            "trits": [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              -1,
+              1
+            ],
+            "name": "体和 用阳 变和 时和 空和 势和 因和 果阴 缘阳",
+            "prob": 0.0134
+          }
+        ],
+        "causal": {
+          "method": "normal",
+          "root_cause": null,
+          "fix_action": null,
+          "confidence": 0.0
+        },
+        "method": "normal",
+        "confidence": 0.0,
+        "root_cause": null,
+        "fix_action": null,
+        "readable": "偏强：功能性能、外部关联",
+        "status": "通过",
+        "judgement": "运行状态正常，无需处置",
+        "risk": 0.0,
+        "risk_factors": [],
+        "suggestions": [
+          "按周期点检即可"
+        ]
+      }
+    },
+    "wear": {
+      "trits": [
+        -1,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        -1,
+        0,
+        1
+      ],
+      "symptom": "本体结构严重异常（振动烈度超标），变化趋势明显异常（劣化速率过快），工艺成因明显异常（润滑压差偏离）",
+      "result": {
+        "device": {
+          "device_id": "PUMP-001"
+        },
+        "symptom": "本体结构严重异常（振动烈度超标），变化趋势明显异常（劣化速率过快），工艺成因明显异常（润滑压差偏离）",
+        "hexagram": {
+          "index": 16405,
+          "trits": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "name": "体和 用阳 变和 时和 空和 势和 因和 果和 缘阳",
+          "readable": "偏强：功能性能、外部关联",
+          "prob": 0.4764
+        },
+        "field": {
+          "entropy": 1.9863,
+          "dispersion": 0.5236,
+          "stationary_ratio": 0.8409,
+          "lam": 1.3462
+        },
+        "top_candidates": [
+          {
+            "index": 16405,
+            "trits": [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "name": "体和 用阳 变和 时和 空和 势和 因和 果和 缘阳",
+            "prob": 0.4764
+          },
+          {
+            "index": 15663,
+            "trits": [
+              -1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              -1,
+              0,
+              1
+            ],
+            "name": "体阴 用和 变阴 时和 空和 势和 因阴 果和 缘阳",
+            "prob": 0.2987
+          },
+          {
+            "index": 16396,
+            "trits": [
+              0,
+              1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "name": "体和 用阳 变阴 时和 空和 势和 因和 果和 缘阳",
+            "prob": 0.009
+          }
+        ],
+        "causal": {
+          "method": "immunity",
+          "confidence": 0.92,
+          "root_cause": "润滑失效",
+          "fix_action": "加注/更换润滑脂并按周期复查油路；磨损超标则更换轴承",
+          "immediate_cause": "命中已核验免疫模式",
+          "pattern_id": "im_3292001323",
+          "verified": true,
+          "hit_count": 1,
+          "match": 0.95,
+          "candidates": [
+            {
+              "root_cause": "润滑失效",
+              "fix_action": "加注/更换润滑脂并按周期复查油路；磨损超标则更换轴承",
+              "score": 0.95
+            }
+          ]
+        },
+        "method": "immunity",
+        "confidence": 0.92,
+        "root_cause": "润滑失效",
+        "fix_action": "加注/更换润滑脂并按周期复查油路；磨损超标则更换轴承",
+        "readable": "偏强：功能性能、外部关联",
+        "risk_factors": [],
+        "risk": 0.0,
+        "status": "通过",
+        "judgement": "判断可靠，可直接派单",
+        "suggestions": []
+      }
+    },
+    "compound": {
+      "trits": [
+        -1,
+        0,
+        -1,
+        0,
+        -1,
+        0,
+        -1,
+        0,
+        1
+      ],
+      "symptom": "本体结构严重异常（振动烈度超标），变化趋势明显异常（劣化速率过快），位置布局严重异常（对中偏差超差），工艺成因明显异常（润滑压差偏离）",
+      "result": {
+        "device": {
+          "device_id": "PUMP-001"
+        },
+        "symptom": "本体结构严重异常（振动烈度超标），变化趋势明显异常（劣化速率过快），位置布局严重异常（对中偏差超差），工艺成因明显异常（润滑压差偏离）",
+        "hexagram": {
+          "index": 15582,
+          "trits": [
+            -1,
+            0,
+            -1,
+            0,
+            -1,
+            0,
+            -1,
+            0,
+            1
+          ],
+          "name": "体阴 用和 变阴 时和 空阴 势和 因阴 果和 缘阳",
+          "readable": "偏强：外部关联；偏弱：本体结构、变化趋势、位置布局、工艺成因",
+          "prob": 0.5933
+        },
+        "field": {
+          "entropy": 1.8336,
+          "dispersion": 0.4067,
+          "stationary_ratio": 0.8784,
+          "lam": 1.3335
+        },
+        "top_candidates": [
+          {
+            "index": 15582,
+            "trits": [
+              -1,
+              0,
+              -1,
+              0,
+              -1,
+              0,
+              -1,
+              0,
+              1
+            ],
+            "name": "体阴 用和 变阴 时和 空阴 势和 因阴 果和 缘阳",
+            "prob": 0.5933
+          },
+          {
+            "index": 15663,
+            "trits": [
+              -1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              -1,
+              0,
+              1
+            ],
+            "name": "体阴 用和 变阴 时和 空和 势和 因阴 果和 缘阳",
+            "prob": 0.1819
+          },
+          {
+            "index": 16405,
+            "trits": [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "name": "体和 用阳 变和 时和 空和 势和 因和 果和 缘阳",
+            "prob": 0.0384
+          }
+        ],
+        "causal": {
+          "method": "immunity",
+          "confidence": 0.92,
+          "root_cause": "润滑失效",
+          "fix_action": "加注/更换润滑脂并按周期复查油路；磨损超标则更换轴承",
+          "immediate_cause": "命中已核验免疫模式",
+          "pattern_id": "im_3292001323",
+          "verified": true,
+          "hit_count": 1,
+          "match": 0.7767,
+          "candidates": [
+            {
+              "root_cause": "润滑失效",
+              "fix_action": "加注/更换润滑脂并按周期复查油路；磨损超标则更换轴承",
+              "score": 0.777
+            },
+            {
+              "root_cause": "安装对中偏差",
+              "fix_action": "重新对中并复测联轴器径向/端面偏差",
+              "score": 0.575
+            }
+          ]
+        },
+        "method": "immunity",
+        "confidence": 0.92,
+        "root_cause": "润滑失效",
+        "fix_action": "加注/更换润滑脂并按周期复查油路；磨损超标则更换轴承",
+        "readable": "偏强：外部关联；偏弱：本体结构、变化趋势、位置布局、工艺成因",
+        "risk_factors": [
+          "composite_ambiguity(gap=0.20)"
+        ],
+        "risk": 0.0,
+        "status": "待复核",
+        "judgement": "已给出候选结论，需人工确认后执行",
+        "suggestions": [
+          "疑似多根因并置，需并联处置并由工程师确认优先级"
+        ]
+      }
+    },
+    "counterfactual": {
+      "intervention": {
+        "因": "阳"
+      },
+      "before": {
+        "hexagram": "体阴 用和 变阴 时和 空阴 势和 因阴 果和 缘阳",
+        "prob": 0.5933,
+        "entropy": 1.8336
+      },
+      "after": {
+        "hexagram": "体和 用阳 变和 时和 空和 势和 因阳 果和 缘阳",
+        "prob": 0.7826,
+        "entropy": 1.2862
+      },
+      "changed_dims": 5,
+      "compat": 0.0178,
+      "lever": "高",
+      "entropy_shift": -0.5473,
+      "verdict": "该维是当前主要偏离项，干预价值最高；修完必须复测确认（复查结果会决定是否再动别处）",
+      "reversible": true
+    },
+    "learn": {
+      "learned": {
+        "chain_id": "cc_1795167614385_3",
+        "hexagram": "体阴 用和 变阴 时和 空和 势和 因阴 果和 缘和",
+        "immunity": {
+          "chains": 4,
+          "immunity_patterns": 4,
+          "verified_patterns": 4
+        },
+        "next": "已入因果库；同类症状下次查询将命中免疫或相似层"
+      },
+      "requery": {
+        "method": "immunity",
+        "confidence": 0.92,
+        "root_cause": "润滑失效",
+        "fix_action": "加注/更换润滑脂并按周期复查油路；磨损超标则更换轴承",
+        "immediate_cause": "命中已核验免疫模式",
+        "pattern_id": "im_3292001323",
+        "verified": true,
+        "hit_count": 1,
+        "match": 1.0,
+        "candidates": [
+          {
+            "root_cause": "润滑失效",
+            "fix_action": "加注/更换润滑脂并按周期复查油路；磨损超标则更换轴承",
+            "score": 1.0
+          },
+          {
+            "root_cause": "润滑失效",
+            "fix_action": "更换润滑脂型号并将换脂周期缩短至 2000h，同时复查油路过滤器",
+            "score": 1.0
+          }
+        ]
+      }
+    },
+    "life": {
+      "alive": true,
+      "breath_count": 1,
+      "uptime_sec": 0.1,
+      "main": {
+        "index": 15582,
+        "trits": [
+          -1,
+          0,
+          -1,
+          0,
+          -1,
+          0,
+          -1,
+          0,
+          1
+        ],
+        "name": "体阴 用和 变阴 时和 空阴 势和 因阴 果和 缘阳",
+        "readable": "偏强：外部关联；偏弱：本体结构、变化趋势、位置布局、工艺成因",
+        "prob": 0.5958
+      },
+      "entropy": 1.8292,
+      "stationary_ratio": 0.8784,
+      "dispersion": 0.4042,
+      "lam": 1.3266,
+      "sources": 3,
+      "memory": {
+        "current_level": "环境",
+        "counts": {
+          "环境": 3,
+          "行为": 3,
+          "能力": 1,
+          "信念": 1,
+          "身份": 0,
+          "使命": 0,
+          "灵性": 0
+        },
+        "evolutions": 0
+      },
+      "causal": {
+        "chains": 4,
+        "immunity_patterns": 4,
+        "verified_patterns": 4
+      }
+    },
+    "perf": {
+      "steps": 200,
+      "ms_total": 356.07,
+      "ms_step": 1.78
+    }
+  },
+  "checks": [
+    {
+      "name": "知识库种子可导入且生成免疫模式",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "健康设备判正常且不触发告警",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "轴承磨损命中免疫层",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "命中后给出可执行处置",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "判断通过闸门可派单",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "复合故障给出结论或明确转人工（不允许硬编造）",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "复合故障应给出多根因并置（不只报一个）",
+      "pass": true,
+      "detail": "2 个候选"
+    },
+    {
+      "name": "反事实推演不污染主场（可逆）",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "沙盘给出抓手等级（高/中/低）",
+      "pass": true,
+      "detail": "高"
+    },
+    {
+      "name": "核验回灌后可再次命中且置信提升",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "场处于可解释稳态（熵在 1.2~2.6 且驻波比 > 0.5）",
+      "pass": true,
+      "detail": "ent=1.8292 stat=0.8784"
+    },
+    {
+      "name": "单步演化 < 5ms（可进生产节拍）",
+      "pass": true,
+      "detail": "1.780 ms"
+    }
+  ],
+  "summary": {
+    "passed": 12,
+    "total": 12
+  }
+}

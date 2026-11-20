@@ -1,0 +1,164 @@
+{
+  "seed": {
+    "chains": 2,
+    "immunity_patterns": 2,
+    "verified_patterns": 2
+  },
+  "complaint": {
+    "device": {
+      "device_id": "LOT-B2405"
+    },
+    "symptom": "本体结构严重异常（涂层厚度偏低），势能负载严重异常（工序能力不足），工艺成因严重异常（槽液浓度偏离），结果质量严重异常（缺陷率偏高），外部关联明显异常（供应商来料 ppm偏高）",
+    "hexagram": {
+      "index": 120,
+      "trits": [
+        -1,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "name": "体阴 用和 变和 时和 空和 势阴 因阴 果阴 缘阴",
+      "readable": "偏弱：本体结构、势能负载、工艺成因、结果质量、外部关联",
+      "prob": 0.8101
+    },
+    "field": {
+      "entropy": 1.1051,
+      "dispersion": 0.1899,
+      "stationary_ratio": 0.93,
+      "lam": 1.3277
+    },
+    "top_candidates": [
+      {
+        "index": 120,
+        "trits": [
+          -1,
+          0,
+          0,
+          0,
+          0,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        "name": "体阴 用和 变和 时和 空和 势阴 因阴 果阴 缘阴",
+        "prob": 0.8101
+      },
+      {
+        "index": 129,
+        "trits": [
+          -1,
+          0,
+          1,
+          0,
+          0,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        "name": "体阴 用和 变阳 时和 空和 势阴 因阴 果阴 缘阴",
+        "prob": 0.0151
+      },
+      {
+        "index": 147,
+        "trits": [
+          -1,
+          0,
+          0,
+          1,
+          0,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        "name": "体阴 用和 变和 时阳 空和 势阴 因阴 果阴 缘阴",
+        "prob": 0.0142
+      }
+    ],
+    "causal": {
+      "method": "immunity",
+      "confidence": 0.92,
+      "root_cause": "供应商防锈剂批次皂基不足",
+      "fix_action": "该批 8D 追溯并换批验证，槽液浓度回调至 5.0% 以上",
+      "immediate_cause": "命中已核验免疫模式",
+      "pattern_id": "im_3609630799",
+      "verified": true,
+      "hit_count": 1,
+      "match": 0.6703,
+      "candidates": [
+        {
+          "root_cause": "供应商防锈剂批次皂基不足",
+          "fix_action": "该批 8D 追溯并换批验证，槽液浓度回调至 5.0% 以上",
+          "score": 0.67
+        }
+      ]
+    },
+    "method": "immunity",
+    "confidence": 0.92,
+    "root_cause": "供应商防锈剂批次皂基不足",
+    "fix_action": "该批 8D 追溯并换批验证，槽液浓度回调至 5.0% 以上",
+    "readable": "偏弱：本体结构、势能负载、工艺成因、结果质量、外部关联",
+    "risk_factors": [],
+    "risk": 0.0,
+    "status": "通过",
+    "judgement": "判断可靠，可直接派单",
+    "suggestions": []
+  },
+  "sandbox": {
+    "cause": {
+      "intervention": {
+        "因": "阳"
+      },
+      "before": {
+        "hexagram": "体阴 用和 变和 时和 空和 势阴 因阴 果阴 缘阴",
+        "prob": 0.8101,
+        "entropy": 1.1051
+      },
+      "after": {
+        "hexagram": "体阴 用和 变和 时和 空和 势阴 因阳 果阴 缘阴",
+        "prob": 0.8189,
+        "entropy": 1.0362
+      },
+      "changed_dims": 1,
+      "compat": 0.0024,
+      "lever": "高",
+      "entropy_shift": -0.0688,
+      "verdict": "该维是当前主要偏离项，干预价值最高；修完必须复测确认（复查结果会决定是否再动别处）",
+      "reversible": true
+    },
+    "origin": {
+      "intervention": {
+        "体": "阳"
+      },
+      "before": {
+        "hexagram": "体阴 用和 变和 时和 空和 势阴 因阴 果阴 缘阴",
+        "prob": 0.8101,
+        "entropy": 1.1051
+      },
+      "after": {
+        "hexagram": "体阳 用和 变和 时和 空和 势阴 因阴 果阴 缘阴",
+        "prob": 0.8198,
+        "entropy": 1.0322
+      },
+      "changed_dims": 1,
+      "compat": 0.0024,
+      "lever": "高",
+      "entropy_shift": -0.0728,
+      "verdict": "该维是当前主要偏离项，干预价值最高；修完必须复测确认（复查结果会决定是否再动别处）",
+      "reversible": true
+    },
+    "priority": "因"
+  },
+  "containment": {
+    "scope": "LOT-B2405",
+    "expand": false,
+    "why": "沙盘显示工艺参数为主要抓手，供应商批次尚未确认，扩批缺乏证据"
+  }
+}

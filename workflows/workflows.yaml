@@ -1,0 +1,133 @@
+# 灵擎「工作流配置」导入文件
+# 两条闭环：设备运维工单闭环、质量根因追溯闭环
+# 节点 type 按通用编排语义书写，导入时映射到灵擎组件即可
+
+workflows:
+
+  - id: wf-ops-workorder-loop
+    name: 设备异常 → 工单闭环 → 经验回灌
+    domain: 运维
+    trigger:
+      type: schedule
+      cron: "0 */2 * * *"          # 每 2 小时拉一次测点
+      plus:
+        - type: event
+          source: scada.alarm        # 实时告警也可触发
+    sla: 15m                         # 从触发到出单的时限
+    nodes:
+      - id: fetch
+        type: connector
+        action: 拉取设备测点（近 2 小时窗口，含趋势）
+      - id: read
+        type: mcp
+        tool: ripple_read_condition
+        note: 先判态势，缺测则标记 evidence_gap
+      - id: branch_gap
+        type: condition
+        expr: evidence_gap == true
+        on_true: notify_human_evidence
+        on_false: diagnose
+      - id: notify_human_evidence
+        type: notify
+        to: 点检员
+        message: 证据不全（缺{{missing_dim}}维测点），请补采后再判
+        terminal: true
+      - id: diagnose
+        type: mcp
+        tool: ripple_diagnose
+      - id: branch_status
+        type: condition
+        expr: status
+        cases:
+          "通过": create_order
+          "待复核": create_order_review
+          "被中和": escalate
+      - id: create_order
+        type: connector
+        action: 写入 EAM 工单（等级取 work_order.level，处置取 fix_action，附证据链）
+      - id: create_order_review
+        type: connector
+        action: 写入 EAM 工单草稿（附 candidate_causes 与并联处置建议）
+        next: notify_engineer
+      - id: notify_engineer
+        type: notify
+        to: 设备工程师
+        message: 复合/未核验结论待确认（候选分差 {{gap}}）
+      - id: escalate
+        type: notify
+        to: 值班工程师
+        message: 证据不足无法判断，转人工；缺 {{evidence_need}}
+        terminal: true
+      - id: closed_loop
+        type: wait_event
+        event: eam.order_closed
+        timeout: 7d
+      - id: extract
+        type: llm
+        action: 从工单闭环记录抽取 (症状, 根因, 处置) 三元组
+        constraint: 只抽取工程师确认后的最终根因，不抽过程猜测
+      - id: learn
+        type: mcp
+        tool: ripple_learn_case
+        args:
+          verified: true
+          trits: "{{diagnose.trits}}"      # 必须复用当次 trits，不得重算
+      - id: audit
+        type: log
+        action: 记录 免疫库增量、命中率、熵
+    metrics:
+      - 自动出单率
+      - 人工填写字段下降量
+      - 从告警到出单中位耗时
+      - 回灌条数 / 免疫新增
+
+  - id: wf-quality-rca-loop
+    name: 客诉/批次异常 → 跨环节根因 → 围堵范围
+    domain: 质量
+    trigger:
+      - type: event
+        source: qms.complaint       # 客诉立案
+      - type: event
+        source: qms.batch_ncr      # 批次不合格
+    sla: 24h
+    nodes:
+      - id: collect
+        type: connector
+        action: 拉取 缺陷类型/工序/批次/供应商/近 3 批检验数据
+      - id: map
+        type: mcp
+        tool: ripple_read_condition
+        note: 使用质量 profile（docs/03 第四节）
+      - id: diagnose
+        type: mcp
+        tool: ripple_diagnose
+      - id: trace
+        type: agent
+        agent: ripple-rca-investigator
+        action: 逐级追溯（成品→工序→来料→供应商），每级需实测证据
+      - id: sandbox
+        type: mcp
+        tool: ripple_counterfactual
+        action: 对候选关键变量做干预沙盘，判"扩批是否值得"
+      - id: decide
+        type: human
+        role: 质量工程师
+        input: [trace 链, 候选分数, 沙盘结果]
+        output: 定案根因 + 围堵范围（批次/时间窗）
+      - id: contain
+        type: connector
+        action: 下发围堵（隔离/复检/供应商 8D）
+      - id: learn
+        type: mcp
+        tool: ripple_learn_case
+        args: {verified: true}
+    metrics:
+      - 追溯链完整率（每级有证据的比例）
+      - 定案周期
+      - 围堵范围准确率（是否过宽/过窄）
+      - 同类复现率（30 天内重复）
+
+shared_policy:
+  - 两条工作流共用同一 RIPPLE_DATA_DIR，但**分域分库**（`ops/` 与 `quality/`），禁止混库
+  - 所有 MCP 调用失败时降级为"转人工"，禁止让大模型兜底编造
+  - 每次出单必须落 evidence 原文，供事后复核与审计

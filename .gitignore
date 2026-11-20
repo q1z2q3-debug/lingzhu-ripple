@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+_shots/
+data/
+demo/_out/data/
+demo/_out/data_quality/
+.DS_Store

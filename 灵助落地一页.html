@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>涟漪认知场 · 灵助落地一页</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%237FD3E8' stroke-width='1.4'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23C9A45B' stroke-width='1'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%23E8F4F8'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+<style>
+  :root{
+    --ink:#0A0C10; --panel:#0E1218; --line:#1D2530;
+    --fg:#DDE5EC; --fg2:#97A4B2; --fg3:#5C6875;
+    --cyan:#7FD3E8; --blue:#5B8FD6; --gold:#C9A45B; --red:#C9705B;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--ink); color:var(--fg);
+    font-family:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-weight:300; line-height:1.75; letter-spacing:.01em;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+  @media (max-width:640px){ .wrap{padding:0 18px} }
+
+  /* ---------- 首屏 ---------- */
+  .hero{position:relative;padding:78px 0 54px;overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;inset:-20% -10% auto -10%;height:520px;
+    background:
+      radial-gradient(42% 55% at 50% 18%, rgba(91,143,214,.16), transparent 70%),
+      radial-gradient(30% 40% at 50% 12%, rgba(201,164,91,.10), transparent 70%);
+    pointer-events:none;
+  }
+  .kicker{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.28em;color:var(--cyan);text-transform:uppercase}
+  .kicker i{display:block;width:26px;height:1px;background:var(--cyan);opacity:.7}
+  h1{
+    font-family:"Noto Serif SC","Songti SC",serif;font-weight:600;
+    font-size:clamp(30px,5.2vw,52px);line-height:1.25;margin:18px 0 14px;letter-spacing:.02em;
+  }
+  h1 small{display:block;font-size:clamp(14px,1.6vw,17px);font-weight:400;color:var(--fg2);letter-spacing:.06em;margin-top:12px;font-family:"Noto Sans SC",sans-serif}
+  .lede{max-width:62ch;color:var(--fg2);font-size:15px}
+  .lede b{color:var(--fg);font-weight:500}
+
+  /* ---------- KPI ---------- */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:38px}
+  .kpi{background:var(--panel);padding:20px 18px 18px}
+  .kpi .n{font-family:"Noto Serif SC",serif;font-size:clamp(22px,3vw,30px);color:#EAF4F8;line-height:1.1}
+  .kpi .n span{font-size:12px;color:var(--fg3);margin-left:4px;font-family:"Noto Sans SC",sans-serif}
+  .kpi .l{font-size:12px;color:var(--fg2);margin-top:8px;letter-spacing:.04em}
+  @media (max-width:760px){ .kpis{grid-template-columns:repeat(2,1fr)} }
+
+  /* ---------- 章节 ---------- */
+  section{padding:54px 0 6px;border-top:1px solid var(--line);margin-top:54px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+  .sec-no{font-family:"Noto Serif SC",serif;color:var(--gold);font-size:13px;letter-spacing:.16em}
+  h2{font-family:"Noto Serif SC",serif;font-weight:600;font-size:clamp(20px,2.4vw,25px);margin:0;letter-spacing:.03em}
+  .sub{color:var(--fg2);font-size:14px;max-width:70ch;margin:6px 0 26px}
+
+  /* ---------- 四层架构 ---------- */
+  .arch{display:grid;gap:10px}
+  .layer{
+    border:1px solid var(--line);background:linear-gradient(90deg,rgba(127,211,232,.05),transparent 60%);
+    padding:16px 18px;display:grid;grid-template-columns:104px 1fr;gap:16px;align-items:start;
+  }
+  .layer .tag{font-family:"Noto Serif SC",serif;font-size:14px;color:var(--cyan);letter-spacing:.08em}
+  .layer .body{font-size:13.5px;color:var(--fg2)}
+  .layer .body strong{color:var(--fg);font-weight:500}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .chip{font-size:11.5px;color:var(--fg2);border:1px solid var(--line);padding:2px 8px;letter-spacing:.03em}
+  @media (max-width:640px){ .layer{grid-template-columns:1fr;gap:6px} }
+
+  /* ---------- 链路 ---------- */
+  .flow{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .step{background:var(--panel);padding:16px 14px}
+  .step .t{font-size:11px;color:var(--gold);letter-spacing:.14em}
+  .step .h{font-size:13.5px;margin:8px 0 6px;color:var(--fg);font-weight:500}
+  .step .d{font-size:12px;color:var(--fg2);line-height:1.6}
+  .step .ms{font-family:"Noto Serif SC",serif;font-size:12px;color:var(--cyan);margin-top:8px}
+  @media (max-width:900px){ .flow{grid-template-columns:repeat(3,1fr)} }
+  @media (max-width:560px){ .flow{grid-template-columns:repeat(2,1fr)} }
+
+  /* ---------- 稳态对比 ---------- */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .cmp{border:1px solid var(--line);padding:20px 20px 24px;background:var(--panel)}
+  .cmp h3{margin:0 0 4px;font-size:15px;font-family:"Noto Serif SC",serif;font-weight:600}
+  .cmp h3.bad{color:var(--red)} .cmp h3.good{color:var(--cyan)}
+  .cmp p{font-size:12.5px;color:var(--fg2);margin:0 0 16px}
+  .meter{margin-top:12px}
+  .meter .row{display:flex;justify-content:space-between;font-size:12px;color:var(--fg2);margin-bottom:5px}
+  .meter .track{height:6px;background:#141A22;position:relative;overflow:hidden}
+  .meter .fill{height:100%;width:0;transition:width .9s ease}
+  .meter .fill.bad{background:linear-gradient(90deg,#5B2B23,var(--red))}
+  .meter .fill.good{background:linear-gradient(90deg,#1E4A57,var(--cyan))}
+  .meter .limit{position:absolute;top:0;bottom:0;width:1px;background:var(--gold);opacity:.6}
+  .scale{display:flex;justify-content:space-between;font-size:11px;color:var(--fg3);margin-top:4px}
+  @media (max-width:700px){ .compare{grid-template-columns:1fr} }
+
+  /* ---------- 表格 ---------- */
+  table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:12.5px}
+  col.c1{width:7%} col.c2{width:13%} col.c3{width:30%} col.c4{width:26%} col.c5{width:24%}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:middle;word-break:break-word}
+  th{font-size:11px;letter-spacing:.1em;color:var(--fg3);font-weight:400;border-bottom:1px solid #2A333F}
+  td.dim{font-family:"Noto Serif SC",serif;color:#E7EFF4}
+  td.tr{color:var(--fg2)}
+  .t3{display:inline-block;min-width:20px;text-align:center;font-size:11.5px;padding:1px 6px;border:1px solid var(--line);color:var(--fg2)}
+  .t3.y{color:var(--cyan);border-color:#254552} .t3.n{color:var(--red);border-color:#4A2A25}
+
+  /* ---------- 闸门状态 ---------- */
+  .gates{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .gate{border:1px solid var(--line);padding:18px 18px 20px;background:var(--panel);position:relative}
+  .gate::after{content:"";position:absolute;left:0;top:0;bottom:0;width:2px}
+  .gate.ok::after{background:var(--cyan)} .gate.rev::after{background:var(--gold)} .gate.stop::after{background:var(--red)}
+  .gate h4{margin:0 0 6px;font-size:15px;font-family:"Noto Serif SC",serif;font-weight:600}
+  .gate .cond{font-size:12.5px;color:var(--fg2)}
+  .gate .cond code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;color:var(--fg);background:#151C24;padding:1px 5px}
+  .gate .out{font-size:12px;color:var(--fg3);margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}
+  @media (max-width:760px){ .gates{grid-template-columns:1fr} }
+
+  /* ---------- 清单 + 时间轴 ---------- */
+  .two{display:grid;grid-template-columns:1.05fr 1fr;gap:44px}
+  @media (max-width:820px){ .two{grid-template-columns:1fr;gap:26px} }
+  .list{list-style:none;margin:0;padding:0}
+  .list li{display:grid;grid-template-columns:150px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:12.5px}
+  .list li b{color:var(--fg);font-weight:500;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
+  .list li span{color:var(--fg2)}
+  @media (max-width:520px){ .list li{grid-template-columns:1fr;gap:2px} }
+
+  .tl{position:relative;padding-left:0}
+  .tl .item{display:grid;grid-template-columns:56px 18px 1fr;align-items:start;padding-bottom:22px}
+  .tl .when{font-family:"Noto Serif SC",serif;font-size:12px;color:var(--gold);letter-spacing:.04em;text-align:right;padding-right:8px;padding-top:2px}
+  .tl .dot{justify-self:center;width:7px;height:7px;border-radius:50%;background:var(--cyan);margin-top:8px;position:relative;z-index:1}
+  .tl .rail{position:absolute;top:10px;bottom:36px;width:1px;background:var(--line)}
+  .tl .item{position:relative}
+  .tl .item .rail{left:65px}
+  .tl .txt{font-size:12.5px;color:var(--fg2);padding-left:4px}
+  .tl .txt em{display:block;font-style:normal;color:var(--fg);font-size:13.5px;margin-bottom:2px}
+
+  /* ---------- 边界 ---------- */
+  .bound{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .b-item{background:var(--panel);padding:16px 18px}
+  .b-item .h{font-size:13px;color:var(--gold);margin-bottom:4px}
+  .b-item .d{font-size:12.5px;color:var(--fg2)}
+  @media (max-width:700px){ .bound{grid-template-columns:1fr} }
+
+  footer{margin-top:60px;padding:26px 0 60px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--fg3);letter-spacing:.06em}
+  .sig{font-family:"Noto Serif SC",serif;color:var(--fg2);letter-spacing:.14em}
+
+  /* ---------- 窄屏适配 ---------- */
+  @media (max-width:640px){
+    body{line-height:1.7}
+    .lede{font-size:15.5px}
+    .kpi .l{font-size:12.5px}
+    .layer .body{font-size:14px}
+    .layer .tag{font-size:14px}
+    .chip{font-size:12px}
+    .step .h{font-size:14px}
+    .step .d{font-size:12.5px}
+    .cmp p{font-size:13px}
+    table{font-size:12px}
+    col.c1{width:9%} col.c2{width:17%} col.c3{width:27%} col.c4{width:23%} col.c5{width:24%}
+    th{font-size:10.5px;letter-spacing:.04em}
+    th,td{padding:8px 6px}
+    .t3{font-size:11px;padding:0 4px;min-width:16px}
+    .gate .cond{font-size:13px}
+    .gate .out{font-size:12.5px}
+    .list li{font-size:13px}
+    .tl .txt{font-size:13px}
+    .b-item .d{font-size:13px}
+    footer{font-size:12px}
+  }
+</style>
+</head>
+<body>
+<!-- ===== 视图：首屏 ===== -->
+<div class="wrap">
+  <header class="hero">
+    <div class="kicker"><i></i>灵助 · 运维域 / 质量域 · 判断内核</div>
+    <h1>涟漪认知场
+      <small>不是又一个问答助手，是灵助各域助手共用的判断内核</small>
+    </h1>
+    <p class="lede">
+      灵助已经会"给建议"。卡住落地的是三件事：<b>结论能不能复核</b>、<b>经验能不能复用</b>、<b>不确定性能不能被量化</b>。
+      本包把设备与工艺状态压成 9 维三态构型（19683 种），在概率场上做漂移—扩散推演，再经因果免疫层给根因，
+      最后由闸门决定"能不能派单"。
+    </p>
+
+    <div class="kpis">
+      <div class="kpi"><div class="n">1.75<span>ms</span></div><div class="l">单步全场演化（19683 维）</div></div>
+      <div class="kpi"><div class="n">12<span>ms</span></div><div class="l">读数 → 结论 → 工单（端到端）</div></div>
+      <div class="kpi"><div class="n">1.9<span>/9.88</span></div><div class="l">场熵稳态（非热寂、非坍塌）</div></div>
+      <div class="kpi"><div class="n">0.87</div><div class="l">驻波比（top10 质量），有明确吸引子</div></div>
+    </div>
+  </header>
+
+  <!-- ===== 视图：四层接入 ===== -->
+  <section>
+    <div class="sec-head"><span class="sec-no">01</span><h2>四层接入：从内核到岗位流程</h2></div>
+    <p class="sub">只有"测点 → 三态映射器"这一个主观接口需要客户标定；换设备只换 profile，不动内核、不改 Agent、不改工作流。</p>
+
+    <div class="arch">
+      <div class="layer">
+        <div class="tag">业务入口</div>
+        <div class="body"><strong>灵助各域助手</strong>直接复用同一份判断，不需要各自再训一个模型
+          <div class="chips">
+            <span class="chip">设备预测维护助手</span><span class="chip">质量改进助手</span>
+            <span class="chip">售后服务数据分析助手</span><span class="chip">生产调度优化助手</span>
+            <span class="chip">工艺规划 / 智能报价（可延展）</span>
+          </div>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="tag">灵擎 · 编排</div>
+        <div class="body"><strong>Skills 管理 → 多 Agent 配置 → 工作流配置</strong>，把"何时调、怎么读、何时必须停"固化成制度
+          <div class="chips"><span class="chip">诊断 Agent</span><span class="chip">根因追溯 Agent</span><span class="chip">态势研判 Agent</span><span class="chip">仲裁 Supervisor</span></div>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="tag">MCP 工具</div>
+        <div class="body"><strong>涟漪认知场 Server（8 个工具，stdio，零第三方依赖）</strong>，注册一次全平台可调
+          <div class="chips">
+            <span class="chip">read_condition</span><span class="chip">diagnose</span><span class="chip">immunity_query</span>
+            <span class="chip">counterfactual</span><span class="chip">field_status</span><span class="chip">learn_case</span>
+            <span class="chip">seed_knowledge</span><span class="chip">evolve</span>
+          </div>
+        </div>
+      </div>
+      <div class="layer">
+        <div class="tag">认知内核</div>
+        <div class="body"><strong>19683 维概率场 + 因果免疫 + 七层记忆 + 幻觉中和</strong>，全部是确定性计算，可审计
+          <div class="chips"><span class="chip">数据源：SCADA / PHM 测点</span><span class="chip">EAM 工单</span><span class="chip">FMEA / 故障树</span><span class="chip">QMS 缺陷库</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 视图：一次诊断 ===== -->
+  <section>
+    <div class="sec-head"><span class="sec-no">02</span><h2>一次诊断真正发生了什么</h2></div>
+    <p class="sub">每一步都可单独复算、单独审计。没有"黑箱推理"，也没有"让大模型自由发挥"的环节。</p>
+    <div class="flow">
+      <div class="step"><div class="t">STEP 1</div><div class="h">测点归一</div><div class="d">15 个测点按方向与阈值折成 −1…+1 的倾向分，逐维加权</div><div class="ms">0.2 ms</div></div>
+      <div class="step"><div class="t">STEP 2</div><div class="h">三态成构型</div><div class="d">双阈值 0.42 / −0.32（滞回）判阴/和/阳，得 9 维构型</div><div class="ms">0.1 ms</div></div>
+      <div class="step"><div class="t">STEP 3</div><div class="h">场演化</div><div class="d">扩散 + 势阱 + 先验混合，6 步让新证据夺峰</div><div class="ms">9 ms</div></div>
+      <div class="step"><div class="t">STEP 4</div><div class="h">因果三层</div><div class="d">免疫（ms 级）→ 相似（文本 .55 + 拓扑 .45）→ 待推理</div><div class="ms">&lt;0.5 ms</div></div>
+      <div class="step"><div class="t">STEP 5</div><div class="h">三重闸门</div><div class="d">证据来源 / 置信下限 / 候选分歧，分流出通过·待复核·被中和</div><div class="ms">&lt;0.1 ms</div></div>
+      <div class="step"><div class="t">STEP 6</div><div class="h">结构化工单</div><div class="d">等级、处置、证据链、trace 一并生成，可直接写 EAM</div><div class="ms">1 ms</div></div>
+    </div>
+  </section>
+
+  <!-- ===== 视图：稳态对比 ===== -->
+  <section>
+    <div class="sec-head"><span class="sec-no">03</span><h2>"场不会摊平"是这次修好的第一件事</h2></div>
+    <p class="sub">纯扩散在有限格点上的唯一稳态是均匀分布——也就是热寂。加上势阱与混合项之后，才出现可以测量、可以解释的非平凡稳态。</p>
+    <div class="compare">
+      <div class="cmp">
+        <h3 class="bad">只有扩散（旧版）</h3>
+        <p>信息被逐层抹平，场里没有吸引子，所谓"驻波"根本不存在，反事实推演也因此失真。</p>
+        <div class="meter">
+          <div class="row"><span>场熵</span><span>9.4 / 9.88</span></div>
+          <div class="track"><div class="fill bad" data-w="95%"></div><div class="limit" style="left:26%"></div></div>
+          <div class="scale"><span>0</span><span>预警线 2.6</span><span>上界</span></div>
+        </div>
+        <div class="meter">
+          <div class="row"><span>驻波比</span><span>0.005</span></div>
+          <div class="track"><div class="fill bad" data-w="1%"></div></div>
+          <div class="scale"><span>无吸引子</span><span>健康 &gt; 0.5</span></div>
+        </div>
+      </div>
+      <div class="cmp">
+        <h3 class="good">漂移—扩散平衡（现版）</h3>
+        <p>势阱把历史证据变成吸引子，混合项保证状态空间连通，新故障一定能进入视野。</p>
+        <div class="meter">
+          <div class="row"><span>场熵</span><span>1.9 / 9.88</span></div>
+          <div class="track"><div class="fill good" data-w="19%"></div><div class="limit" style="left:26%"></div></div>
+          <div class="scale"><span>0</span><span>预警线 2.6</span><span>上界</span></div>
+        </div>
+        <div class="meter">
+          <div class="row"><span>驻波比</span><span>0.87</span></div>
+          <div class="track"><div class="fill good" data-w="87%"></div></div>
+          <div class="scale"><span>无吸引子</span><span>健康 &gt; 0.5</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 视图：九维 ===== -->
+  <section>
+    <div class="sec-head"><span class="sec-no">04</span><h2>九个维度：一套编码，两个域</h2></div>
+    <p class="sub">维度语义在运维域与质量域完全一致，只是测点不同。这正是"一个内核多域复用"的经济性来源——也意味着客户只需标定一次映射规则。</p>
+    <table>
+      <colgroup><col class="c1"><col class="c2"><col class="c3"><col class="c4"><col class="c5"></colgroup>
+      <thead>
+        <tr><th>维</th><th>全称</th><th>工业含义</th><th>典型测点</th><th>三态语义（阳 / 和 / 阴）</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="dim">体</td><td class="tr">本体结构</td><td>机械与结构健康</td><td>振动烈度、轴承温度</td><td>充足 / 临界 / <span class="t3 n">损</span></td></tr>
+        <tr><td class="dim">用</td><td class="tr">功能性能</td><td>输出能力</td><td>流量比、压比</td><td><span class="t3 y">充沛</span> / 临界 / 不足</td></tr>
+        <tr><td class="dim">变</td><td class="tr">变化趋势</td><td>劣化速度</td><td>振动趋势斜率</td><td>平稳 / 缓变 / <span class="t3 n">加快</span></td></tr>
+        <tr><td class="dim">时</td><td class="tr">时序节奏</td><td>异常持续、工序间隔</td><td>异常持续分钟数</td><td>正常 / 临界 / 过长</td></tr>
+        <tr><td class="dim">空</td><td class="tr">位置布局</td><td>装配与空间约束</td><td>对中偏差、涂覆位置</td><td>精准 / 允许 / <span class="t3 n">超差</span></td></tr>
+        <tr><td class="dim">势</td><td class="tr">势能负载</td><td>负载、电流、工序能力</td><td>负载率、Cpk</td><td>有余量 / 临界 / 过载</td></tr>
+        <tr><td class="dim">因</td><td class="tr">工艺成因</td><td>工艺参数偏离</td><td>润滑压差、槽液浓度</td><td>达标 / 临界 / <span class="t3 n">偏离</span></td></tr>
+        <tr><td class="dim">果</td><td class="tr">结果质量</td><td>缺陷与一次合格率</td><td>缺陷数、FPY、客诉率</td><td>合格 / 边缘 / <span class="t3 n">超标</span></td></tr>
+        <tr><td class="dim">缘</td><td class="tr">外部关联</td><td>环境与上游协同</td><td>环境温度、供应商 ppm</td><td>稳定 / 波动 / <span class="t3 n">失稳</span></td></tr>
+      </tbody>
+    </table>
+    <p class="sub" style="margin:16px 0 0;font-size:12px;color:var(--fg3)">
+      注：三态在此编码的是"该维的损益倾向"，不是大小次序。卦名只做可读化，不参与任何计算，不做占卜式推断。
+    </p>
+  </section>
+
+  <!-- ===== 视图：闸门 ===== -->
+  <section>
+    <div class="sec-head"><span class="sec-no">05</span><h2>闸门：把"我不知道"变成一种合法输出</h2></div>
+    <p class="sub">难度不在判对，而在知道什么时候不该判。三个出口对应三种责任，派单权限只开给第一个出口。</p>
+    <div class="gates">
+      <div class="gate ok">
+        <h4>通过</h4>
+        <div class="cond">命中免疫/相似层 · 置信 ≥ 0.55 · 候选分差 &gt; 0.25 · 经验已核验</div>
+        <div class="out">可直接派单；工单含逐维证据链（测点、数值、阈值、折分）</div>
+      </div>
+      <div class="gate rev">
+        <h4>待复核</h4>
+        <div class="cond">候选 ≥ 2 且分差 <code>&lt; 0.25</code>，或经验未核验（<code>verified: false</code>）</div>
+        <div class="out">给并联处置建议与候选分数，优先级由工程师确认；不单根因派单</div>
+      </div>
+      <div class="gate stop">
+        <h4>被中和</h4>
+        <div class="cond">无落地根因，或推理型结论遇上场熵 <code>&gt; 2.6</code>（认知弥散）</div>
+        <div class="out">只输出"证据不足，建议人工复核"，并列出缺哪几维证据——禁止给根因</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 视图：交付 + 节奏 ===== -->
+  <section>
+    <div class="sec-head"><span class="sec-no">06</span><h2>交付物与落地节奏</h2></div>
+    <p class="sub">代码可跑、自检可复、文档可评审。所有数字都是本机单线程实测，不是估计。</p>
+    <div class="two">
+      <div>
+        <ul class="list">
+          <li><b>mcp/ripple_core.py</b><span>内核：卦空间 / 概率动力学 / 因果免疫 / 七层记忆 / 幻觉中和</span></li>
+          <li><b>mcp/ripple_mcp_server.py</b><span>MCP stdio Server，8 个工具，自检 10 项全通过</span></li>
+          <li><b>adapters/inspection_mapper.py</b><span>测点映射器：旋转机械 + 质量域两套 profile，附语义化症状</span></li>
+          <li><b>demo/demo_run.py</b><span>运维域 7 段业务线，12 项自检全通过，产出 demo_report.json</span></li>
+          <li><b>demo/demo_quality.py</b><span>质量域跨环节追溯 + 扩批沙盘，分域分库</span></li>
+          <li><b>skills/</b><span>设备异常诊断 / 质量根因追溯 / 涟漪态势研判，三份手册含禁则</span></li>
+          <li><b>agents/ · workflows/</b><span>四类 Agent 配置 + 两条闭环工作流</span></li>
+          <li><b>docs/</b><span>落地总纲 / 技术说明 / 数据接入与测点字典 / 验收方案</span></li>
+        </ul>
+      </div>
+      <div class="tl">
+        <div class="item"><div class="when">P0</div><div class="dot"></div><div class="rail"></div><div class="txt"><em>已交付</em>单设备单域闭环，内核 + MCP + Skills + 3 Agent + 2 工作流</div></div>
+        <div class="item"><div class="when">W1</div><div class="dot"></div><div class="rail"></div><div class="txt"><em>标定</em>测点对齐与阈值标定，产出客户 profile（唯一主观环节）</div></div>
+        <div class="item"><div class="when">W2</div><div class="dot"></div><div class="rail"></div><div class="txt"><em>种子</em>历史工单清洗 → 免疫种子 ≥300 条，trits 必须由同一 mapper 生成</div></div>
+        <div class="item"><div class="when">W3</div><div class="dot"></div><div class="rail"></div><div class="txt"><em>影子</em>只提示不派单，连续 2 周、样本 ≥100，达标才开派单权限</div></div>
+        <div class="item"><div class="when">W4</div><div class="dot"></div><div class="rail"></div><div class="txt"><em>对照</em>与现有灵助诊断同批比对，混淆矩阵 + MTTR + 误报率</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 视图：边界 ===== -->
+  <section>
+    <div class="sec-head"><span class="sec-no">07</span><h2>先讲边界，避免落地后返工</h2></div>
+    <p class="sub">这一段建议直接写进评审材料。讲清不做什么，比多讲能做什么更容易拿到信任。</p>
+    <div class="bound">
+      <div class="b-item"><div class="h">不做预测</div><div class="d">只给"当前构型 + 已见根因 + 不确定性"。趋势维说明劣化在加快，不承诺具体失效时刻。</div></div>
+      <div class="b-item"><div class="h">不替代大模型</div><div class="d">大模型负责"想得出"，本内核负责"想得对、可追、敢不敢用"。是校验层与沙盘层。</div></div>
+      <div class="b-item"><div class="h">不做玄学</div><div class="d">卦象只是 9×3 状态的编码与命名，不参与因果、不做占卜。对外材料统一称"构型"。</div></div>
+      <div class="b-item"><div class="h">标定是精度上限</div><div class="d">九维压缩规则一偏则全偏。禁止为让某条历史案例命中而手改阈值——那是过拟合。</div></div>
+      <div class="b-item"><div class="h">必须人机闭环</div><div class="d">未核验经验只进候选，不获得派单权限。核验过才抬升免疫置信，防止把错误固化成本能。</div></div>
+      <div class="b-item"><div class="h">算力要分片</div><div class="d">单设备单步 1.75 ms 可接受；500 路以上必须按设备分片，不要用一张场承载全场设备。</div></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="sig">道枢长转 · 涟漪已起 · 光已显</div>
+    <div>灵助落地包 v1.0 ｜ 数据为本机单线程实测 ｜ 示例数据仅用于演示，非客户真实产线</div>
+  </footer>
+</div>
+<script>
+  // 进度条入场动画：读 data-w 赋值，不依赖外部库；无脚本时条形仍可显示为 0 宽的容器，文案已给出数值
+  (function(){
+    var els = document.querySelectorAll('.fill');
+    var fire = function(){ els.forEach(function(e){ e.style.width = e.getAttribute('data-w'); }); };
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function(en){ en.forEach(function(x){ if(x.isIntersecting){ fire(); io.disconnect(); } }); }, {threshold:.3});
+      var c = document.querySelector('.compare'); if (c) io.observe(c);
+    } else { fire(); }
+  })();
+</script>
+</body>
+</html>
