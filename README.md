@@ -7,7 +7,9 @@
 本包补的正是这三件：把设备/工艺状态压成一个 9 维三态构型（19683 种），
 在概率场上做漂移-扩散推演得到可解释的态势，再经因果免疫层给根因，最后由闸门决定"能不能派单"。
 
-在线方案页：`docs/index.html`（GitHub Pages 入口）；本地双击 `灵助落地一页.html` 亦可。
+- 仓库：https://github.com/q1z2q3-debug/lingzhu-ripple
+- 在线方案页（GitHub Pages，源 main:/docs）：https://q1z2q3-debug.github.io/lingzhu-ripple/
+- 本地直开：`灵助落地一页.html`（单文件、零外链依赖，双击即用）
 
 ---
 
